@@ -48,8 +48,10 @@ interface FeedItem {
   user_feedback?: string | null;
 }
 
+import { getApiBaseUrl } from "../config";
+
 const DEFAULT_USER_ID = "00000000-0000-0000-0000-000000000001";
-const API_BASE = `http://localhost:8000/api/v1/feed/${DEFAULT_USER_ID}`;
+const API_BASE = `${getApiBaseUrl()}/api/v1/feed/${DEFAULT_USER_ID}`;
 
 const SEED_FEED_ITEMS: FeedItem[] = [
   {

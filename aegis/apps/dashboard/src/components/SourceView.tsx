@@ -16,7 +16,9 @@ interface SourceItem {
   last_success_at?: string | null;
 }
 
-const API_BASE = "http://localhost:8000/api/v1/sources";
+import { getApiBaseUrl } from "../config";
+
+const API_BASE = `${getApiBaseUrl()}/api/v1/sources`;
 
 const SEED_SOURCES: SourceItem[] = [
   {

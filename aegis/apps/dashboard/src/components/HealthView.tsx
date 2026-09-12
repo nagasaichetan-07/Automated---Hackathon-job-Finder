@@ -17,6 +17,8 @@ interface EvaluationMetrics {
   chaos_tests_total?: number;
 }
 
+import { getApiBaseUrl } from "../config";
+
 export const HealthView: React.FC = () => {
   const [metrics, setMetrics] = useState<EvaluationMetrics | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -26,7 +28,7 @@ export const HealthView: React.FC = () => {
   const fetchMetrics = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/api/v1/metrics/summary");
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/metrics/summary`);
       if (res.ok) {
         const data = await res.json();
         setMetrics(data);
@@ -63,7 +65,7 @@ export const HealthView: React.FC = () => {
     setEvaluating(true);
     setEvalMessage(null);
     try {
-      const res = await fetch("http://localhost:8000/api/v1/metrics/evaluate", {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/metrics/evaluate`, {
         method: "POST",
       });
       if (res.ok) {

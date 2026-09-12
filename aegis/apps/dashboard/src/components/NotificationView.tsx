@@ -41,8 +41,10 @@ interface Preferences {
   is_currently_quiet_hours: boolean;
 }
 
+import { getApiBaseUrl } from "../config";
+
 const DEFAULT_USER_ID = "00000000-0000-0000-0000-000000000001";
-const API_BASE = "http://localhost:8000/api/v1/notifications";
+const API_BASE = `${getApiBaseUrl()}/api/v1/notifications`;
 
 const SEED_NOTIFICATIONS: NotificationItem[] = [
   {

@@ -42,11 +42,9 @@ type UploadState =
   | { phase: "confirmed" }
   | { phase: "error"; message: string };
 
-/* -----------------------------------------------------------------------
-   API helpers
-   ----------------------------------------------------------------------- */
+import { getApiBaseUrl } from "../config";
 
-const API = "http://localhost:8000/api/v1/profile";
+const API = `${getApiBaseUrl()}/api/v1/profile`;
 
 async function fetchProfile(userId: string): Promise<ProfileData | null> {
   try {

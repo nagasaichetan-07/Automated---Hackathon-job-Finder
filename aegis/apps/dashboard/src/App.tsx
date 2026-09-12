@@ -8,6 +8,8 @@ import { ProfileView } from "./components/ProfileView";
 import { RepairView } from "./components/RepairView";
 import { SourceView } from "./components/SourceView";
 
+import { getApiBaseUrl } from "./config";
+
 type Tab = "feed" | "saved" | "sources" | "profile" | "notifications" | "repair" | "health";
 
 interface HealthStatus {
@@ -33,7 +35,7 @@ export const App: React.FC = () => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 2000);
 
-    fetch("http://localhost:8000/health/live", { signal: controller.signal })
+    fetch(`${getApiBaseUrl()}/health/live`, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error("API returned non-200");
         return res.json();

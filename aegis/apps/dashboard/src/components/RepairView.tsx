@@ -32,6 +32,8 @@ interface RepairRun {
   patches: RepairPatch[];
 }
 
+import { getApiBaseUrl } from "../config";
+
 export const RepairView: React.FC = () => {
   const [runs, setRuns] = useState<RepairRun[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,7 +43,7 @@ export const RepairView: React.FC = () => {
   const fetchRepairRuns = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/api/v1/repair/runs");
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/repair/runs`);
       if (res.ok) {
         const data = await res.json();
         setRuns(data);
@@ -62,7 +64,7 @@ export const RepairView: React.FC = () => {
 
   const handleApprove = async (patchId: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/repair/patches/${patchId}/approve`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/repair/patches/${patchId}/approve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ approved_by: "dashboard_admin" }),
@@ -81,7 +83,7 @@ export const RepairView: React.FC = () => {
 
   const handleRollback = async (patchId: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/repair/patches/${patchId}/rollback`, {
+      const res = await fetch(`${getApiBaseUrl()}/api/v1/repair/patches/${patchId}/rollback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reason: "Dashboard user initiated rollback" }),
