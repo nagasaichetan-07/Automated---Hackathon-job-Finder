@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { User } from "firebase/auth";
-import { signInWithGoogle, logoutFirebase, subscribeToAuth } from "./firebase";
+import { signInWithGoogle, logoutFirebase, subscribeToAuth, checkRedirectResult } from "./firebase";
 import { FeedView } from "./components/FeedView";
 import { HealthView } from "./components/HealthView";
 import { NotificationView } from "./components/NotificationView";
@@ -26,6 +26,11 @@ export const App: React.FC = () => {
   const [authError, setAuthError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Check for redirect result on return
+    checkRedirectResult().then((user) => {
+      if (user) setAuthUser(user);
+    });
+
     // Subscribe to Firebase Auth state
     const unsubscribe = subscribeToAuth((user) => {
       setAuthUser(user);
