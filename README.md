@@ -10,6 +10,9 @@ AEGIS treats opportunity discovery as an **autonomous intelligence pipeline, not
 
 > **Quantifiable Impact:** By autonomously scanning, filtering, and ranking opportunities across fragmented sources 24/7, AEGIS saves students an estimated **15+ hours per week** of manual job-board hunting, and ensures zero missed deadlines through proactive notification scheduling with quiet-hours awareness.
 
+### 🔗 Live Demo
+> **Dashboard:** [https://aegis-gmxy.vercel.app](https://aegis-gmxy.vercel.app/)
+
 ---
 
 ## 🏛️ System Architecture
