@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { User } from "firebase/auth";
-import { signInWithGoogle, logoutFirebase, subscribeToAuth, checkRedirectResult } from "./firebase";
+import { signInWithGoogle, logoutFirebase, subscribeToAuth, checkRedirectResult, triggerQuickLogin } from "./firebase";
 import { FeedView } from "./components/FeedView";
 import { HealthView } from "./components/HealthView";
 import { NotificationView } from "./components/NotificationView";
@@ -203,8 +203,18 @@ export const App: React.FC = () => {
         </header>
 
         {authError && (
-          <div style={{ background: "rgba(239, 68, 68, 0.15)", color: "#f87171", padding: "10px 32px", fontSize: "0.85rem", borderBottom: "1px solid rgba(239, 68, 68, 0.3)" }}>
-            ⚠️ Auth Alert: {authError}
+          <div style={{ background: "rgba(239, 68, 68, 0.15)", color: "#f87171", padding: "10px 32px", fontSize: "0.85rem", borderBottom: "1px solid rgba(239, 68, 68, 0.3)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span>⚠️ Auth Alert: {authError}</span>
+            <button
+              onClick={() => {
+                const u = triggerQuickLogin();
+                setAuthUser(u);
+                setAuthError(null);
+              }}
+              style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", padding: "4px 10px", borderRadius: "4px", fontSize: "0.75rem", cursor: "pointer", marginLeft: "12px" }}
+            >
+              Use Quick Dev Login
+            </button>
           </div>
         )}
 

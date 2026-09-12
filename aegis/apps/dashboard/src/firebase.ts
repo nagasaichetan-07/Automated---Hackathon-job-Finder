@@ -10,7 +10,7 @@ import {
   Auth,
 } from "firebase/auth";
 
-// Production Firebase Configuration (Uses Vite Env variables with real project fallback)
+// Production Firebase Configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyBS5qFj1HCy3_BFIlcOyQjcBH05TaDCn18",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "aegis-6d9d2.firebaseapp.com",
@@ -51,7 +51,7 @@ export const getStoredUser = (): User | null => {
 };
 
 /**
- * Trigger Google Sign In Popup with zero-fail fallback for production deployments
+ * Trigger Google Sign In Popup (Opens account selector screen)
  */
 export const signInWithGoogle = async (): Promise<User | null> => {
   try {
@@ -66,24 +66,29 @@ export const signInWithGoogle = async (): Promise<User | null> => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
       return result.user;
     }
+    return null;
   } catch (error: any) {
     if (error.code === "auth/popup-closed-by-user" || error.code === "auth/cancelled-popup-request") {
       console.info("Google Sign-In popup closed by user.");
       return null;
     }
-
-    console.warn("Firebase Auth Notice:", error.code || error.message);
+    console.error("Firebase Google Sign-In Error:", error);
+    throw error;
   }
+};
 
-  // Production deployment fallback: ensures user login ALWAYS works seamlessly
-  const fallbackUser: SimpleUser = {
+/**
+ * Manual quick login trigger if explicitly requested
+ */
+export const triggerQuickLogin = (): User => {
+  const devUser: SimpleUser = {
     uid: "google-user-hyd-007",
     displayName: "Sai Chetan (Hyd Developer)",
     email: "nagasaichetan07@gmail.com",
     photoURL: "https://lh3.googleusercontent.com/a/ACg8ocL-demo-avatar=s96-c",
   };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(fallbackUser));
-  return fallbackUser as unknown as User;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(devUser));
+  return devUser as unknown as User;
 };
 
 /**
