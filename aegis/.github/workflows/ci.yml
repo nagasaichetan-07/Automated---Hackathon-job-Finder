@@ -1,0 +1,98 @@
+name: Aegis CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  backend-lint-test:
+    name: Backend Lint, Type Check & Test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: aegis_user
+          POSTGRES_PASSWORD: aegis_password
+          POSTGRES_DB: aegis_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Ruff Linter & Formatter Check
+        run: |
+          ruff check aegis
+          ruff format --check aegis
+
+      - name: Run Mypy Type Check
+        run: |
+          mypy aegis/core aegis/apps/api aegis/apps/worker aegis/storage
+
+      - name: Run Alembic Migrations
+        env:
+          DATABASE_SYNC_URL: postgresql://aegis_user:aegis_password@localhost:5432/aegis_db
+        run: |
+          cd aegis && alembic upgrade head
+
+      - name: Run Pytest Suite
+        env:
+          DATABASE_URL: postgresql+asyncpg://aegis_user:aegis_password@localhost:5432/aegis_db
+          DATABASE_SYNC_URL: postgresql://aegis_user:aegis_password@localhost:5432/aegis_db
+          REDIS_URL: redis://localhost:6379/0
+        run: |
+          pytest aegis/tests -v
+
+  frontend-build:
+    name: Frontend Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: aegis/apps/dashboard/package.json
+
+      - name: Install Frontend Dependencies
+        working-directory: aegis/apps/dashboard
+        run: npm ci
+
+      - name: Build React Dashboard
+        working-directory: aegis/apps/dashboard
+        run: npm run build

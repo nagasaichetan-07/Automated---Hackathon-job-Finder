@@ -1,0 +1,34 @@
+[
+  {
+    "id": "e4f3a71b-7a89-4bc2-8cd3-123456789abc",
+    "text": "Data Science & AI Intern",
+    "hostedUrl": "https://jobs.lever.co/apex/e4f3a71b-7a89-4bc2-8cd3-123456789abc",
+    "applyUrl": "https://jobs.lever.co/apex/e4f3a71b-7a89-4bc2-8cd3-123456789abc/apply",
+    "createdAt": 1772450000000,
+    "categories": {
+      "commitment": "Internship",
+      "department": "Data Intelligence",
+      "location": "New York, NY",
+      "team": "Analytics"
+    },
+    "workplaceType": "hybrid",
+    "descriptionPlain": "Apex is seeking a Data Science Intern to develop LLM-based intelligence solutions and automated evaluation frameworks.",
+    "description": "<div><p>Apex is seeking a Data Science Intern to develop LLM-based intelligence solutions.</p></div>"
+  },
+  {
+    "id": "f8a1b2c3-1122-3344-5566-778899aabbcc",
+    "text": "Full Stack Platform Engineer",
+    "hostedUrl": "https://jobs.lever.co/apex/f8a1b2c3-1122-3344-5566-778899aabbcc",
+    "applyUrl": "https://jobs.lever.co/apex/f8a1b2c3-1122-3344-5566-778899aabbcc/apply",
+    "createdAt": 1772500000000,
+    "categories": {
+      "commitment": "Full-time",
+      "department": "Core Platform",
+      "location": "Austin, TX",
+      "team": "Infrastructure"
+    },
+    "workplaceType": "remote",
+    "descriptionPlain": "Scale our real-time messaging pipeline, Postgres databases, and Redis caching infrastructure.",
+    "description": "<div><p>Scale our real-time messaging pipeline.</p></div>"
+  }
+]

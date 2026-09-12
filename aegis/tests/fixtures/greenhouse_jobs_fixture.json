@@ -1,0 +1,52 @@
+{
+  "jobs": [
+    {
+      "id": 4120938002,
+      "title": "Software Engineering Intern - Systems & Cloud",
+      "absolute_url": "https://boards.greenhouse.io/acme/jobs/4120938002",
+      "location": {
+        "name": "San Francisco, CA (Hybrid)"
+      },
+      "updated_at": "2026-03-01T15:30:00Z",
+      "departments": [
+        {
+          "id": 1001,
+          "name": "Engineering"
+        },
+        {
+          "id": 1002,
+          "name": "Cloud Infrastructure"
+        }
+      ],
+      "offices": [
+        {
+          "id": 201,
+          "name": "SF HQ"
+        }
+      ],
+      "content": "&lt;p&gt;We are looking for a passionate Software Engineering Intern to join our Cloud Infrastructure team. You will work on distributed systems, Python, Kubernetes, and Go.&lt;/p&gt;&lt;p&gt;Requirements:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Currently enrolled in BS/MS in Computer Science or related degree&lt;/li&gt;&lt;li&gt;Graduation year 2026 or 2027&lt;/li&gt;&lt;/ul&gt;"
+    },
+    {
+      "id": 4120938003,
+      "title": "Machine Learning Engineer - Full Time",
+      "absolute_url": "https://boards.greenhouse.io/acme/jobs/4120938003",
+      "location": {
+        "name": "Remote, US"
+      },
+      "updated_at": "2026-03-02T10:15:00Z",
+      "departments": [
+        {
+          "id": 1003,
+          "name": "AI & Research"
+        }
+      ],
+      "offices": [
+        {
+          "id": 202,
+          "name": "Remote"
+        }
+      ],
+      "content": "&lt;p&gt;Build state-of-the-art embedding pipelines and vector retrieval architectures at scale.&lt;/p&gt;"
+    }
+  ]
+}

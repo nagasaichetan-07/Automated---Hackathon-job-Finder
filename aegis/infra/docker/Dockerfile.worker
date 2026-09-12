@@ -1,0 +1,32 @@
+# Multi-stage Dockerfile for Aegis Celery Worker & Beat Scheduler
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+FROM python:3.11-slim AS runner
+
+WORKDIR /app
+
+COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONUNBUFFERED=1
+
+COPY aegis/core ./core
+COPY aegis/storage ./storage
+COPY aegis/connectors ./connectors
+COPY aegis/extraction ./extraction
+COPY aegis/normalization ./normalization
+COPY aegis/opportunity ./opportunity
+COPY aegis/notifications ./notifications
+COPY aegis/agents ./agents
+COPY aegis/apps/worker ./apps/worker
+
+CMD ["celery", "-A", "apps.worker.celery_app", "worker", "--loglevel=info"]

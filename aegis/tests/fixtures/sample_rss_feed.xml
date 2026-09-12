@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Tech Internships &amp; Hackathons Daily</title>
+    <link>https://example.org/opportunities</link>
+    <description>Curated feed of student developer opportunities</description>
+    <language>en-us</language>
+    <item>
+      <title>Global AI Campus Hackathon 2026</title>
+      <link>https://example.org/hackathons/global-ai-2026</link>
+      <guid>https://example.org/hackathons/global-ai-2026</guid>
+      <pubDate>Thu, 05 Mar 2026 12:00:00 GMT</pubDate>
+      <description>Join 500+ student teams to build autonomous agents and generative AI tools. $25,000 in total prizes. Remote participation allowed.</description>
+      <category>Hackathon</category>
+      <category>Artificial Intelligence</category>
+    </item>
+    <item>
+      <title>Summer 2026 Systems Research Internship</title>
+      <link>https://example.org/internships/summer-2026-systems</link>
+      <guid>https://example.org/internships/summer-2026-systems</guid>
+      <pubDate>Fri, 06 Mar 2026 09:30:00 GMT</pubDate>
+      <description>Paid 12-week research internship focusing on distributed consensus and storage performance.</description>
+      <category>Internship</category>
+      <category>Distributed Systems</category>
+    </item>
+  </channel>
+</rss>

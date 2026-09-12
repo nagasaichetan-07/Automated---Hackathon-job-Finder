@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-09-12T00:00:00Z",
+  "extraction_cases": [
+    {
+      "id": "ext-001",
+      "fixture_file": "hackathon_page_jsonld.html",
+      "expected_fields": {
+        "title": "Global AI Hackathon 2025",
+        "category": "hackathon",
+        "organizer": "Global AI Network",
+        "mode": "hybrid",
+        "registration_deadline": "2025-11-15T23:59:59+00:00"
+      }
+    },
+    {
+      "id": "ext-002",
+      "fixture_file": "hackathon_page_unstructured.html",
+      "expected_fields": {
+        "title": "Unstructured Innovation Challenge",
+        "category": "hackathon",
+        "mode": "onsite"
+      }
+    }
+  ],
+  "eligibility_cases": [
+    {
+      "id": "elig-001",
+      "profile": {
+        "education_level": "bachelor",
+        "graduation_year": 2026,
+        "branch": "computer_science",
+        "locations": ["Remote", "San Francisco, CA"]
+      },
+      "opportunity": {
+        "title": "AI Research Intern",
+        "registration_deadline": "2026-12-31T23:59:59+00:00",
+        "mode": "remote",
+        "eligibility_text": "Must be currently enrolled in a Bachelor degree in Computer Science graduating in 2026."
+      },
+      "expected_verdict": "ELIGIBLE"
+    },
+    {
+      "id": "elig-002",
+      "profile": {
+        "education_level": "bachelor",
+        "graduation_year": 2024,
+        "branch": "mechanical_engineering",
+        "locations": ["New York, NY"]
+      },
+      "opportunity": {
+        "title": "Frontend Internship",
+        "registration_deadline": "2024-01-01T00:00:00+00:00",
+        "mode": "onsite",
+        "eligibility_text": "Must be graduating in 2026."
+      },
+      "expected_verdict": "INELIGIBLE"
+    },
+    {
+      "id": "elig-003",
+      "profile": {
+        "education_level": null,
+        "graduation_year": null,
+        "branch": null
+      },
+      "opportunity": {
+        "title": "Generic Hackathon",
+        "registration_deadline": "2026-10-10T00:00:00+00:00"
+      },
+      "expected_verdict": "UNKNOWN"
+    }
+  ],
+  "ranking_cases": [
+    {
+      "id": "rank-001",
+      "profile": {
+        "skills": ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript"],
+        "education_level": "bachelor",
+        "graduation_year": 2026,
+        "branch": "computer_science",
+        "locations": ["Remote"]
+      },
+      "candidates": [
+        {
+          "id": "opp-001",
+          "title": "Python & FastAPI Backend Intern",
+          "mode": "remote",
+          "skills": ["Python", "FastAPI", "PostgreSQL"],
+          "registration_deadline": "2026-12-31T00:00:00+00:00"
+        },
+        {
+          "id": "opp-002",
+          "title": "Fullstack Software Developer",
+          "mode": "remote",
+          "skills": ["React", "TypeScript", "Python"],
+          "registration_deadline": "2026-12-31T00:00:00+00:00"
+        },
+        {
+          "id": "opp-003",
+          "title": "Expired Internship",
+          "mode": "remote",
+          "skills": ["Python"],
+          "registration_deadline": "2020-01-01T00:00:00+00:00"
+        }
+      ],
+      "expected_top_order": ["opp-001", "opp-002"],
+      "expected_disqualified": ["opp-003"]
+    }
+  ]
+}
